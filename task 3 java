@@ -1,0 +1,27 @@
+document.getElementById('temperature-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    var temperature = parseFloat(document.getElementById('temperature').value);
+    var unit = document.getElementById('unit').value;
+    var result;
+
+    if (isNaN(temperature)) {
+        alert('Please enter a valid temperature.');
+        return;
+    }
+
+    if (unit === 'celsius') {
+        result = (temperature * 9/5) + 32 + '°F';
+    } else if (unit === 'fahrenheit') {
+        result = (temperature - 32) * 5/9 + '°C';
+    } else if (unit === 'kelvin') {
+        result = temperature - 273.15 + '°C';
+    }
+
+    if (unit === 'celsius' || unit === 'fahrenheit') {
+        result += ' or ' + (unit === 'celsius' ? (temperature + 273.15) : (temperature * 1.8)) + ' K';
+    } else {
+        result += ' or ' + (temperature + 273.15) + '°C';
+    }
+
+    document.getElementById('result').textContent = 'Converted temperature: ' + result;
+});
